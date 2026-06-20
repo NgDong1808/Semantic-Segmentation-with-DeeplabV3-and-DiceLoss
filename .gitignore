@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Data, models, results (do not commit large files)
+data/
+model/
+result/
+*.pth
+*.pt
+
+# IDEs
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+
+# Packaging
+*.egg-info/
+dist/
+build/
+
+# pytest
+.pytest_cache/
+
+# Others
+.env

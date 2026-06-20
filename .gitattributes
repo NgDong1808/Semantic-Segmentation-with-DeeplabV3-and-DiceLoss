@@ -1,0 +1,7 @@
+# Ensure consistent handling of line endings and language hints
+* text=auto
+*.py text eol=lf
+*.md text
+*.png binary
+*.jpg binary
+*.jpeg binary
