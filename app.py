@@ -103,4 +103,14 @@ def run_inference(image_dir: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8001, log_level="info")
+    import webbrowser
+    import threading
+    import time
+
+    def open_docs():
+        time.sleep(1)  
+        webbrowser.open("http://127.0.0.1:8001/docs")
+
+    threading.Thread(target=open_docs).start()
+
+    uvicorn.run(app, host="127.0.0.1", port=8001)
