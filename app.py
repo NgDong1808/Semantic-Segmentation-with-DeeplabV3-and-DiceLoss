@@ -4,7 +4,8 @@ import torch
 from src.dataset_ver1 import augmentation_transforms
 from src.train_with_DiceLoss import train
 from src.test_ver1 import batch_inference
-
+from src.export_model import export_model_to_onnx
+import os
 state = {
     "training": False,
     "trained": False,
@@ -101,6 +102,26 @@ def run_inference(image_dir: str):
         batch_inference(backbone=state['backbone'], image_dir=image_dir, model_path=model_path, output_dir=output_dir, num_classes=num_classes, img_size=img_size)
     return {"message": f"Inference completed. Results saved to {output_dir}."}
 
+@app.post(
+    "/export_onnx",
+    tags=["Export"])
+def export_onnx(backbone: str = "mobilenet_v3_large", num_classes: int = 2, img_width: int = 300, img_height: int = 150):
+    """Export the trained model to ONNX format."""
+    if not state["trained"]:
+        return {"error": "Model weights not found. Please ensure the model is trained and the weights are saved at the specified path."}
+    else:
+        img_size = (img_height, img_width)
+        model_path: str = f"./model/best_deeplabv3_{backbone}_segmentation.pth"
+        output_path: str = "./exported_models"
+        if(not os.path.exists(output_path)):
+            os.makedirs(output_path)
+        if not os.path.exists(model_path):
+            return {"error": f"Model weights not found at: {model_path}. Please check the path and try again."}
+        else:
+            onnx_output_path = os.path.join(output_path, f"deeplabv3_{backbone}.onnx")
+            export_model_to_onnx(backbone=backbone, model_path=model_path, onnx_output_path=onnx_output_path, num_classes=num_classes, img_size=img_size)
+        
+    return {"message": f"Model exported to ONNX format at {onnx_output_path}."}
 if __name__ == "__main__":
     import uvicorn
     import webbrowser
