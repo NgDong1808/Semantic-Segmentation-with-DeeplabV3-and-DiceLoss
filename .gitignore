@@ -11,6 +11,8 @@ env/
 # Data, models, results (do not commit large files)
 data/
 model/
+exported_models/
+*.onnx
 result/
 *.pth
 *.pt
