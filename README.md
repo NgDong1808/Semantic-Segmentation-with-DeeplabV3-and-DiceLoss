@@ -18,6 +18,13 @@ A PyTorch-based semantic segmentation project for detecting cracks in pill/ginse
 - [License](#license)
 
 ---
+## Example Output
+
+The image below shows a predicted overlay for `predicted_pill_ginseng_crack_007.png`. Crack regions detected by the model are highlighted in the overlay.
+
+![Predicted crack overlay](predicted_pill_ginseng_crack_007.png)
+
+---
 
 ## Motivation: Why Dice Loss?
 
@@ -234,14 +241,6 @@ Returns whether a model has been trained and which compute device is available.
   "device": "cuda"
 }
 ```
-
----
-
-## Example Output
-
-The image below shows a predicted overlay for `predicted_pill_ginseng_crack_007.png`. Crack regions detected by the model are highlighted in the overlay.
-
-![Predicted crack overlay](predicted_pill_ginseng_crack_007.png)
 
 ---
 
